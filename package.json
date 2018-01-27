@@ -1,7 +1,7 @@
 {
-  "name": "ncb-api",
+  "name": "ss-api",
   "version": "1.0.13",
-  "description": "RESTful API for Naturecarebox.com",
+  "description": "RESTful API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -14,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@easypost/api": "^3.2.1",
-    "angular2-cool-storage": "^3.1.5",
     "bcrypt": "^1.0.3",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
