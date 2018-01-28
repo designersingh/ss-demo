@@ -14,7 +14,8 @@ module.exports = {
         },
         linkedIn        : {
             clientId        : '784j2g9vjk3lke',
-            clientSecret    : 'Ojw8uDtP4yZjby7T'
+            clientSecret    : 'Ojw8uDtP4yZjby7T',
+            callbackURL     : 'http://localhost:8081/api/v1/auth/linkedin/callback' // callback url where linkedin data is received
         },
         stripe          : {
             publishable     : '',

@@ -9,7 +9,12 @@ const express = require("express"),
 	httpsRedirect = require('express-https-redirect'),
     mongoose = require("mongoose"),
     mongooseOptions = {useMongoClient: true};
-    mongoose.Promise = require("bluebird");
+    mongoose.Promise = require("bluebird"),
+    passport = require("passport"),
+    session = require('express-session');
+
+// passport strategies init
+require('./server/config/passport')(passport);
 
 mongoose.connect(config.db, mongooseOptions, err => {
     if(err){console.log(err)}
@@ -20,6 +25,15 @@ app.use('/', httpsRedirect());
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
+
+// session init (required for oauth)
+app.use(session({
+    secret: config.secret,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /*const WebhooksApi = require("./server/webhooks/routes/webhookApi")(app, express);
 app.use("/webhook/v1/", WebhooksApi);*/

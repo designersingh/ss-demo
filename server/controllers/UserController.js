@@ -16,7 +16,8 @@ const randomstring = require("randomstring"),
     EmailTemplateController = require('../shared/email/EmailTemplateController'),
 	EmailTemplateEnum = require('../enums/allEnums').emailTemplate,
     stripe = require('stripe')(config.stripe.secretKey),
-	voucherCodeGenerator = require('voucher-code-generator');
+    voucherCodeGenerator = require('voucher-code-generator'),
+    passport = require('passport'); // import passport
 
 
 
@@ -240,6 +241,33 @@ UserController.prototype.getUserDetails     = function(req, res, next) {
 	        });
         }
     });
+};
+
+/**
+ * oauth callback handler
+ * 
+ * @param {String} strategy the social auth passport strategy to use e.g. linkedin, facebook, twitter
+ * 
+ */
+UserController.prototype.oauthCallback     = function(strategy) {
+    return function(req, res, next) {
+        passport.authenticate(strategy, { failureRedirect: '/login' }, function(err, user){
+            if (err || !user) {
+                return res.status(HttpStatus.BAD_REQUEST).send({success:false, error:err});
+            } else {
+                let userDetails = UserController.prototype.createUserResponseObj(user);
+                
+                const token = createToken(userDetails);
+                
+	            res.status(HttpStatus.OK).json({
+		            success     : true,
+		            message     : 'Login Successfully',
+		            authToken   : token,
+		            user        : user // currently sending entire linked in user object
+	            });
+            }
+        })(req, res, next)
+    };
 };
 
 module.exports = new UserController();
