@@ -266,9 +266,9 @@ UserController.prototype.oauthCallback     = function(strategy) {
 		            user        : user // currently sending entire linked in user object
                 }
 
-                // json cannot be sent in a redirect so the token is sent as a url parameter
-                var urlToken = encodeURIComponent(token);
-                return res.redirect(config.feEndPoint + '?token=' + urlToken);
+                // sending data back as header cookie
+                res.cookie('user' ,JSON.stringify(userObject), {expires: new Date(Date.now + 20*60*60*1000)});
+                return res.redirect(config.feEndPoint);
                 // using passport to add user data to headers
                 /* req.login(userObject, function(err) {
                     if (err) {
