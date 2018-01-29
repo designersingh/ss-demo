@@ -21,11 +21,6 @@ mongoose.connect(config.db, mongooseOptions, err => {
     console.log("Connected to the database");
 });
 
-// created to serve login page, use angular dist index instead
-app.get('/login', function(req, res, next) {
-    res.sendFile(__dirname + '/index.html')
-});
-
 app.use('/', httpsRedirect());
 app.use(morgan("dev"));
 app.use(helmet());

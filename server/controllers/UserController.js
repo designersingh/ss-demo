@@ -258,13 +258,25 @@ UserController.prototype.oauthCallback     = function(strategy) {
                 let userDetails = UserController.prototype.createUserResponseObj(user);
                 
                 const token = createToken(userDetails);
-                
-	            res.status(HttpStatus.OK).json({
+
+	            let userObject = {
 		            success     : true,
 		            message     : 'Login Successfully',
 		            authToken   : token,
 		            user        : user // currently sending entire linked in user object
-	            });
+                }
+
+                // json cannot be sent in a redirect so the token is sent as a url parameter
+                var urlToken = encodeURIComponent(token);
+                return res.redirect(config.feEndPoint + '?token=' + urlToken);
+                // using passport to add user data to headers
+                /* req.login(userObject, function(err) {
+                    if (err) {
+                        return res.redirect(config.feEndPoint);
+                    }
+                    var urlToken = encodeURIComponent(token);
+                    return res.redirect(config.feEndPoint + '?token=' + urlToken);
+                }); */
             }
         })(req, res, next)
     };

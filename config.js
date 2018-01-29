@@ -1,7 +1,7 @@
 module.exports = {
     'dev'               : {
         name            : 'dev',
-        feEndPoint      : 'http://localhost:3000',
+        feEndPoint      : 'http://localhost:4200', // changed as i am using webpack
         db              : 'mongodb://slickslotDev:vLZRfNkV0qSNMq9P@slickslot-dev-shard-00-00-gt9vy.mongodb.net:27017,slickslot-dev-shard-00-01-gt9vy.mongodb.net:27017,slickslot-dev-shard-00-02-gt9vy.mongodb.net:27017/test?ssl=true&replicaSet=slickslot-dev-shard-0&authSource=admin',
         port            : 8081,
         secret          : "ncbamazingunicorns",
