@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <!-- Form for email login -->
+    <form name="loginForm" method="post" action="/api/v1/login">
+        <table width="20%" align="center">
+            <tr>
+                <td colspan=2>
+                    <center>
+                        <font size=4>
+                            <b>Login Page</b>
+                        </font>
+                    </center>
+                </td>
+            </tr>
+
+            <tr>
+                <td>email:</td>
+                <td>
+                    <input type="text" size=25 name="email">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <input type="Password" size=25 name="password">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="Reset">
+                </td>
+                <td>
+                    <input type="submit">
+                </td>
+                <td>
+                    <!-- Social login can be added as an anchor tag or button. It will redirect to the social login page then send data to back to the defined callback url -->
+                    <a href="/api/v1/auth/linkedin">LinkedIn Login</a>
+                </td>   
+            </tr>
+
+        </table>
+    </form>
+    <script language="javascript">
+        
+    </script>
+
+</body>
+</html>
